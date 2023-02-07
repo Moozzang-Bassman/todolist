@@ -7,6 +7,8 @@
 
 }
 
+
+
 input {
     border: none;
     height: 40px;
@@ -74,5 +76,6 @@ h4 {
 
 
 .wrap {
-    margin-left: 24px;
+    gap: 20px;
+    display: flex;
 }
