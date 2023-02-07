@@ -19,6 +19,10 @@ function App() {
     setTitle('')
     setDesc('')
   }
+  const clickRemoveHandler = (id) => {
+    const newState = state.filter(item => item.id !== id);
+    setState(newState);
+  }
   return (
     <div>
       <div className='input-box'>
@@ -48,9 +52,7 @@ function App() {
                 {item.body}
               </p>
               <div className='done-btn'>
-                <button className='btn1' onClick={() => {
-                  alert(item.id)
-                }}>삭제하기</button>
+                <button className='btn1' onClick={() => clickRemoveHandler(item.id)}>삭제하기</button>
                 <button className='btn2' onClick={() => {
                   alert(item.isDone)
                 }}>완료</button>
