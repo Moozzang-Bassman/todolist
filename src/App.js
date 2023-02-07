@@ -23,6 +23,15 @@ function App() {
     const newState = state.filter(item => item.id !== id);
     setState(newState);
   }
+  const clickIsDoneHandler = (i) => {
+    let copy = [...state]
+    if (copy[i].isDone === false) {
+      copy[i].isDone = true;
+    } else {
+      copy[i].isDone = false;
+    }
+    setState(copy)
+  }
   return (
     <div>
       <div className='input-box'>
@@ -42,7 +51,33 @@ function App() {
 
       <h2 >Working..🔥</h2>
       <div className='wrap'>
-        {state.map((item) => {
+
+        <Test state={state} clickRemoveHandler={clickRemoveHandler} clickIsDoneHandler={clickIsDoneHandler}></Test>
+      </div>
+
+
+      <div>
+        <h2>Done..!🎊</h2>
+        <div className='wrap'>
+
+        </div>
+      </div>
+
+
+
+
+
+    </div >
+  );
+}
+function Test(props) {
+  const state = props.state
+  const clickRemoveHandler = props.clickRemoveHandler
+  const clickIsDoneHandler = props.clickIsDoneHandler
+  return (
+    <>
+      {
+        state.map((item, i) => {
           return (<div key={item.id} className='todo-container'>
             <div className='inner-contents'>
               <h2>
@@ -53,44 +88,20 @@ function App() {
               </p>
               <div className='done-btn'>
                 <button className='btn1' onClick={() => clickRemoveHandler(item.id)}>삭제하기</button>
-                <button className='btn2' onClick={() => {
-                  alert(item.isDone)
-                }}>완료</button>
+                <button className='btn2' onClick={() => clickIsDoneHandler(i)}>{!item.isDone ? '완료' : '취소'}</button>
               </div>
             </div>
           </div>)
 
-        })}
-
-      </div>
-      <div>
-        <h2>Done..!🎊</h2>
-        <div className='wrap'>
-          <div className='todo-container'>
-            <div className='inner-contents'>
-              <h2>
-                리액트 공부하기
-              </h2>
-              <p>
-                리액트 기초를 공부해봅시다
-              </p>
-              <div className='done-btn'>
-                <button className='btn1'>삭제하기</button>
-                <button className='btn2'>취소</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        })
+      }
 
 
 
+    </>
 
-
-    </div>
-  );
+  )
 }
-
 
 
 export default App;
